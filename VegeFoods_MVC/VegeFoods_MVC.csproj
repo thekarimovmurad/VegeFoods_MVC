@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\admin\assets\css\.DS_Store" />
+    <None Include="wwwroot\admin\assets\css\bootstrap\.DS_Store" />
+    <None Include="wwwroot\admin\assets\css\bootstrap\tests\.DS_Store" />
+    <None Include="wwwroot\admin\assets\fonts\.DS_Store" />
+    <None Include="wwwroot\admin\assets\fonts\bootstrap\.DS_Store" />
+    <None Include="wwwroot\admin\assets\images\.DS_Store" />
+    <None Include="wwwroot\admin\assets\images\browser\.DS_Store" />
+    <None Include="wwwroot\admin\assets\images\flags\.DS_Store" />
+    <None Include="wwwroot\admin\assets\images\flowers\.DS_Store" />
+    <None Include="wwwroot\admin\assets\js\.DS_Store" />
+    <None Include="wwwroot\admin\assets\vendor\.DS_Store" />
+    <None Include="wwwroot\admin\assets\vendor\apex\.DS_Store" />
+    <None Include="wwwroot\admin\assets\vendor\apex\custom\.DS_Store" />
+    <None Include="wwwroot\admin\assets\vendor\apex\custom\graphs\.DS_Store" />
+    <None Include="wwwroot\admin\assets\vendor\calendar\.DS_Store" />
+    <None Include="wwwroot\admin\assets\vendor\calendar\css\.DS_Store" />
+    <None Include="wwwroot\admin\assets\vendor\jvectormap\.DS_Store" />
+    <None Include="wwwroot\admin\assets\vendor\jvectormap\custom\.DS_Store" />
+    <None Include="wwwroot\admin\assets\vendor\morris\.DS_Store" />
+    <None Include="wwwroot\admin\assets\vendor\morris\custom\.DS_Store" />
+    <None Include="wwwroot\admin\assets\vendor\overlay-scroll\.DS_Store" />
+    <None Include="wwwroot\admin\assets\vendor\particles\.DS_Store" />
+    <None Include="wwwroot\css\.DS_Store" />
+    <None Include="wwwroot\css\bootstrap\.DS_Store" />
+    <None Include="wwwroot\css\css\.DS_Store" />
+    <None Include="wwwroot\css\css\mixins\.DS_Store" />
+    <None Include="wwwroot\fonts\.DS_Store" />
+    <None Include="wwwroot\fonts\flaticon\.DS_Store" />
+    <None Include="wwwroot\fonts\flaticon\font\.DS_Store" />
+    <None Include="wwwroot\fonts\ionicons\fonts\.DS_Store" />
+    <None Include="wwwroot\js\.DS_Store" />
+    <None Include="wwwroot\scss\.DS_Store" />
+    <None Include="wwwroot\scss\bootstrap\.DS_Store" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+  </ItemGroup>
+
+</Project>
