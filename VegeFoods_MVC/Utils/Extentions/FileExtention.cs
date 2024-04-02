@@ -21,12 +21,12 @@ namespace VegeFoods_MVC.Utils.Extentions
 
 		public static async Task<string> FileUpload(this IFormFile file, string root, string folder)
 		{
-			string fileName = Guid.NewGuid().ToString() + "-" + Path.GetFileName(file.FileName);
-			string finalPath = Path.Combine(root, folder, fileName);
-			using (var fileStream = new FileStream(finalPath, FileMode.Create))
-				await file.CopyToAsync(fileStream);
+            string fileName = Guid.NewGuid().ToString() + "-" + Path.GetFileName(file.FileName);
+            string finalPath = Path.Combine(root, folder, fileName);
+            using (var fileStream = new FileStream(finalPath, FileMode.Create))
+                await file.CopyToAsync(fileStream);
 
-			return fileName;
-		}
+            return fileName;
+        }
 	}
 }

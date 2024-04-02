@@ -9,14 +9,14 @@ using VegeFoods_MVC.DAL;
 using VegeFoods_MVC.Models;
 using VegeFoods_MVC.Utils.Extentions;
 
-namespace VegeFoods_MVC.Areas.Admin.Controllers
+namespace VegeFoods_MVC.Areas.Manage.Controllers
 {
     [Area("Manage")]
-    public class SliderController : Controller
+    public class PartnerController : Controller
     {
         private readonly AppDbContext _db;
         private readonly IWebHostEnvironment _env;
-        public SliderController(AppDbContext db, IWebHostEnvironment env)
+        public PartnerController(AppDbContext db, IWebHostEnvironment env)
         {
             _db = db;
             _env = env;
@@ -24,14 +24,14 @@ namespace VegeFoods_MVC.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _db.Sliders.ToListAsync());
+            return View(await _db.Partners.ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
                 return NotFound();
-            var slider = await _db.Sliders.FirstOrDefaultAsync(x => x.Id == id);
+            var slider = await _db.Partners.FirstOrDefaultAsync(x => x.Id == id);
             if (slider == null)
                 return NotFound();
             return View(slider);
@@ -44,16 +44,16 @@ namespace VegeFoods_MVC.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BackgroundImage,ImageFile,Title,Subtitle,Id")] Slider slider)
+        public async Task<IActionResult> Create([Bind("PartnerLogo,ImageFile,Id")] Partner partner)
         {
             if (ModelState.IsValid)
             {
-                if (slider.ImageFile.CheckFileType("image/"))
+                if (partner.ImageFile.CheckFileType("image/"))
                 {
-                    if (slider.ImageFile.CheckFileSize(5000))
+                    if (partner.ImageFile.CheckFileSize(5000))
                     {
-                        slider.BackgroundImage = await slider.ImageFile.FileUpload(_env.WebRootPath, @"images");
-                        _db.Add(slider);
+                        partner.PartnerLogo = await partner.ImageFile.FileUpload(_env.WebRootPath, @"images");
+                        _db.Add(partner);
                         await _db.SaveChangesAsync();
                         return RedirectToAction(nameof(Index));
                     }
@@ -69,32 +69,32 @@ namespace VegeFoods_MVC.Areas.Admin.Controllers
                     return View();
                 }
             }
-            return View(slider);
+            return View(partner);
         }
 
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
                 return NotFound();
-            var slider = await _db.Sliders.FirstOrDefaultAsync(x => x.Id == id);
-            if (slider == null)
+            var partner = await _db.Partners.FirstOrDefaultAsync(x => x.Id == id);
+            if (partner == null)
                 return NotFound();
-            return View(slider);
+            return View(partner);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int? id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (id == null)
                 return NotFound();
-            var slider = await _db.Sliders.FirstOrDefaultAsync(x => x.Id == id);
-            if (slider == null)
+            var partner = await _db.Partners.FirstOrDefaultAsync(x => x.Id == id);
+            if (partner == null)
                 return NotFound();
-            string filePath = Path.Combine(_env.WebRootPath, @"images\", slider.BackgroundImage);
+            string filePath = Path.Combine(_env.WebRootPath, @"images\", partner.PartnerLogo);
             if (System.IO.File.Exists(filePath))
                 System.IO.File.Delete(filePath);
-            _db.Sliders.Remove(slider);
+            _db.Partners.Remove(partner);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -103,33 +103,30 @@ namespace VegeFoods_MVC.Areas.Admin.Controllers
         {
             if (id == null)
                 return NotFound();
-            var slider = await _db.Sliders.FirstOrDefaultAsync(x => x.Id == id);
-            if (slider == null)
+            var partner = await _db.Partners.FirstOrDefaultAsync(x => x.Id == id);
+            if (partner == null)
                 return NotFound();
-            return View(slider);
+            return View(partner);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BackgroundImage,ImageFile,Title,Subtitle,Id")] Slider slider)
+        public async Task<IActionResult> Edit(int id, [Bind("PartnerLogo,ImageFile,Id")] Partner partner)
         {
-            if (slider.ImageFile == null)
-            {
-                ModelState.Remove("ImageFile");
-                ModelState.Remove("BackgroundImage");
-            }
             if (ModelState.IsValid)
             {
-                if (slider.ImageFile != null)
+                if (partner.ImageFile != null)
                 {
-                    if (slider.ImageFile.CheckFileType("image/"))
+                    if (partner.ImageFile.CheckFileType("image/"))
                     {
-                        if (slider.ImageFile.CheckFileSize(5000))
+                        if (partner.ImageFile.CheckFileSize(5000))
                         {
-                            string filePath = Path.Combine(_env.WebRootPath, @"images\", slider.BackgroundImage);
+                            string filePath = Path.Combine(_env.WebRootPath, @"images\", partner.PartnerLogo);
                             if (System.IO.File.Exists(filePath))
                                 System.IO.File.Delete(filePath);
-                            slider.BackgroundImage = await slider.ImageFile.FileUpload(_env.WebRootPath, @"images");
+                            partner.PartnerLogo = await partner.ImageFile.FileUpload(_env.WebRootPath, @"images");
+                            _db.Update(partner);
+                            await _db.SaveChangesAsync();
                         }
                         else
                         {
@@ -143,11 +140,9 @@ namespace VegeFoods_MVC.Areas.Admin.Controllers
                         return View();
                     }
                 }
-                _db.Update(slider);
-                await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(slider);
+            return View(partner);
         }
     }
 }

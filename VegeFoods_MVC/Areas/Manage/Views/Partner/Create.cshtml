@@ -1,4 +1,4 @@
-﻿@model VegeFoods_MVC.Models.Slider
+﻿@model VegeFoods_MVC.Models.Partner
 
 @{
     ViewData["Title"] = "Create";
@@ -11,16 +11,6 @@
     <div class="col-md-4">
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Subtitle" class="control-label"></label>
-                <input asp-for="Subtitle" class="form-control" />
-                <span asp-validation-for="Subtitle" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="ImageFile" class="control-label"></label>
                 <input accept="image/*" asp-for="ImageFile" class="form-control" />
@@ -37,4 +27,8 @@
     <a class="btn btn-primary btn-icon btn-sm mb-1" asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}}
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

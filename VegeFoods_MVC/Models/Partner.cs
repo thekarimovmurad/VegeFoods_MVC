@@ -1,7 +1,12 @@
-﻿namespace VegeFoods_MVC.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace VegeFoods_MVC.Models
 {
     public class Partner:Base
     {
-        public required string PartnerLogo { get; set; }
+        public string PartnerLogo { get; set; } = string.Empty;
+        [Display(Name = "Upload Image"), NotMapped]
+        public IFormFile ImageFile { get; set; }
     }
 }

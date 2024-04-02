@@ -1,1 +1,28 @@
-﻿<h1>fajf;ljma fkdf dfkjgb akekfoqr[pj onbhop mpk  nab gycqyr tfyx v b drc ybyg vr vimok, k ngvdr xexewsz wzw z es x ed x ws z azwa zws xdc f v ywerntiwnt qereno ik nskjgfang  ga dufigh kl s </h1>
+﻿@model DashboardViewModel
+
+<h1>Dashboard</h1>
+<br />
+<div class="row">
+	<div class="col-sm-3 col-6">
+		<div class="d-flex flex-column p-3 rounded-2 border border-info">
+			<h5 class="mb-3">Slider count - <span>@Model.slidersCount</span></h5>
+		<a><a class="btn btn-primary btn-icon btn-sm mb-1" asp-controller="Slider" asp-action="Index">Go to Slider</a></a>
+		</div>
+	</div>
+	<div class="col-sm-3 col-6">
+		<div class="d-flex flex-column p-3 rounded-2 border border-warning">
+			<h5 class="mb-3">Partners count - <span>@Model.partnersCount</span></h5>
+			<a><a class="btn btn-warning btn-icon btn-sm mb-1" asp-controller="partner" asp-action="Index">Go to Slider</a></a>
+		</div>
+	</div>
+	<div class="col-sm-3 col-6">
+		<div class="d-flex flex-column p-3 rounded-2 border border-success">
+			<h5 class="mb-3">Q3 - <span>$55,000</span></h5>
+		</div>
+	</div>
+	<div class="col-sm-3 col-6">
+		<div class="d-flex flex-column p-3 rounded-2 border border-danger">
+			<h5 class="mb-3">Q4 - <span>$48,000</span></h5>
+		</div>
+	</div>
+</div>
