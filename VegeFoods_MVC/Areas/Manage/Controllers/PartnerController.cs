@@ -127,6 +127,7 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
                             partner.PartnerLogo = await partner.ImageFile.FileUpload(_env.WebRootPath, @"images");
                             _db.Update(partner);
                             await _db.SaveChangesAsync();
+                            return RedirectToAction(nameof(Index));
                         }
                         else
                         {
@@ -140,7 +141,6 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
                         return View();
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(partner);
         }
