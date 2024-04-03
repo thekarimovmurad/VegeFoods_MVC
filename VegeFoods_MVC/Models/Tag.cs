@@ -1,4 +1,6 @@
-﻿namespace VegeFoods_MVC.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+namespace VegeFoods_MVC.Models
 {
     public class Tag:Base
     {

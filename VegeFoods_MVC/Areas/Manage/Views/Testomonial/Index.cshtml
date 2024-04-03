@@ -4,50 +4,64 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Testomonial</h1>
 
+<br />
 <p>
-    <a asp-action="Create">Create New</a>
+	<a class="btn btn-primary btn-lg" asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProfileImage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FullName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Message)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProfileImage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Message)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<div class="row">
+	<div class="col-xxl-12">
+		<div class="card mb-4">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table align-middle table-hover m-0">
+						<thead>
+							<tr>
+								<th scope="col">
+									@Html.DisplayNameFor(model => model.Id)
+								</th>
+								<th scope="col">
+									Image
+								</th>
+								<th scope="col">
+									@Html.DisplayNameFor(model => model.FullName)
+								</th>
+								<th scope="col">
+									@Html.DisplayNameFor(model => model.Title)
+								</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model)
+							{
+								<tr>
+									<td>
+										@Html.DisplayFor(modelItem => item.Id)
+									</td>
+									<td scope="row">
+										<img class="rounded-circle img-3x me-2" src="~/images/@Html.DisplayFor(modelItem => item.ProfileImage)"
+											 alt="Bootstrap Gallery" />
+									</td>
+									<td>
+										@Html.DisplayFor(modelItem => item.FullName)
+									</td>
+									<td>
+										@Html.DisplayFor(modelItem => item.Title)
+									</td>
+									<td>
+										<a class="btn btn-warning btn-icon btn-sm mb-1" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil"></i></a>
+										<a class="btn btn-primary btn-icon btn-sm mb-1" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-search"></i></a>
+										<a class="btn btn-danger btn-icon btn-sm mb-1" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

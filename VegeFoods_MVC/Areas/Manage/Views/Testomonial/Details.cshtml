@@ -7,14 +7,13 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Testomonial</h4>
-    <hr />
+    <br />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ProfileImage)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProfileImage)
+            <img class="col-sm-10" src="~/images/@Html.DisplayFor(model => model.ProfileImage)" />
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FullName)
@@ -37,6 +36,8 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-warning btn-icon btn-sm mb-1" asp-action="Edit" asp-route-id="@Model?.Id"><i class="bi bi-pencil"></i></a>
+    <a class="btn btn-danger btn-icon btn-sm mb-1" asp-action="Delete" asp-route-id="@Model?.Id"><i class="bi bi-trash"></i></a>
+    <a class="btn btn-primary btn-icon btn-sm mb-1" asp-action="Index">Back to List</a>
 </div>
+

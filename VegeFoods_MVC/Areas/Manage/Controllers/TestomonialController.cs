@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VegeFoods_MVC.DAL;
 using VegeFoods_MVC.Models;
+using VegeFoods_MVC.Utils.Extentions;
 
 namespace VegeFoods_MVC.Areas.Manage.Controllers
 {
@@ -44,18 +45,34 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProfileImage,FullName,Title,Message,Id")] Testomonial testomonial)
+        public async Task<IActionResult> Create([Bind("ProfileImage,ImageFile,FullName,Title,Message,Id")] Testomonial testomonial)
         {
             if (ModelState.IsValid)
             {
-                _db.Add(testomonial);
-                await _db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (testomonial.ImageFile.CheckFileType("image/"))
+                {
+                    if (testomonial.ImageFile.CheckFileSize(5000))
+                    {
+                        testomonial.ProfileImage = await testomonial.ImageFile.FileUpload(_env.WebRootPath, @"images");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("ImageFile", "Max file size is 5000 kbs.");
+                        return View();
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("ImageFile", "File must be an image.");
+                    return View();
+                }
+                        _db.Add(testomonial);
+                        await _db.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
             }
             return View(testomonial);
         }
 
-        // GET: Manage/Testomonial/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -67,70 +84,71 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
             return View(testomonial);
         }
 
-        // POST: Manage/Testomonial/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProfileImage,FullName,Title,Message,Id")] Testomonial testomonial)
+        public async Task<IActionResult> Edit(int id, [Bind("ProfileImage,ImageFile,FullName,Title,Message,Id")] Testomonial testomonial)
         {
-            if (id != testomonial.Id)
+            if (testomonial.ImageFile == null)
             {
-                return NotFound();
+                ModelState.Remove("ImageFile");
+                ModelState.Remove("ProfileImage");
             }
-
             if (ModelState.IsValid)
             {
-                try
+                if (testomonial.ImageFile != null)
                 {
-                    _db.Update(testomonial);
-                    await _db.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TestomonialExists(testomonial.Id))
+                    if (testomonial.ImageFile.CheckFileType("image/"))
                     {
-                        return NotFound();
+                        if (testomonial.ImageFile.CheckFileSize(5000))
+                        {
+                            string filePath = Path.Combine(_env.WebRootPath, @"images\", testomonial.ProfileImage);
+                            if (System.IO.File.Exists(filePath))
+                                System.IO.File.Delete(filePath);
+                            testomonial.ProfileImage = await testomonial.ImageFile.FileUpload(_env.WebRootPath, @"images");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("ImageFile", "Max file size is 5000 kbs.");
+                            return View();
+                        }
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError("ImageFile", "File must be an image.");
+                        return View();
                     }
                 }
+                _db.Update(testomonial);
+                await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(testomonial);
         }
 
-        // GET: Manage/Testomonial/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
-            var testomonial = await _db.Testomonials
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var testomonial = await _db.Testomonials.FirstOrDefaultAsync(m => m.Id == id);
             if (testomonial == null)
-            {
                 return NotFound();
-            }
 
             return View(testomonial);
         }
 
-        // POST: Manage/Testomonial/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var testomonial = await _db.Testomonials.FindAsync(id);
-            if (testomonial != null)
-            {
-                _db.Testomonials.Remove(testomonial);
-            }
-
+            if (id == null)
+                return NotFound();
+            var testomonial = await _db.Testomonials.FirstOrDefaultAsync(m => m.Id == id);
+            if (testomonial == null)
+                return NotFound();
+            string filePath = Path.Combine(_env.WebRootPath, @"images\", testomonial.ProfileImage);
+            if (System.IO.File.Exists(filePath))
+                System.IO.File.Delete(filePath);
+            _db.Testomonials.Remove(testomonial);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
