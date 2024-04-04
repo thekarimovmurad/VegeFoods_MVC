@@ -1,0 +1,5 @@
+﻿@Html.Partial("_CreateButtonSection")
+@Html.Partial("_DeleteButtonSection")
+@Html.Partial("_DetailsButtonSection")
+@Html.Partial("_EditButtonSection")
+@Html.Partial("_IndexCreateSection")
