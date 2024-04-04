@@ -3,8 +3,7 @@
 @{
     ViewData["Title"] = "Edit";
 }
-<h1>Edit</h1>
-
+<h1>Edit - Sliders</h1>
 <br />
 <div class="row">
     <div class="col-md-4">
@@ -34,13 +33,7 @@
         </form>
     </div>
 </div>
-
-
-<div>
-    <a class="btn btn-warning btn-icon btn-sm mb-1" asp-action="Details" asp-route-id="@Model?.Id"><i class="bi bi-search"></i></a>
-    <a class="btn btn-danger btn-icon btn-sm mb-1" asp-action="Delete" asp-route-id="@Model?.Id"><i class="bi bi-trash"></i></a>
-    <a class="btn btn-primary btn-icon btn-sm mb-1" asp-action="Index">Back to List</a>
-</div>
+@Html.Partial("_EditButtonSection")
 
 @section Scripts {
     @{

@@ -21,12 +21,10 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
             _db = db;
             _env = env;
         }
-
         public async Task<IActionResult> Index()
         {
             return View(await _db.Partners.ToListAsync());
         }
-
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,12 +34,10 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
                 return NotFound();
             return View(slider);
         }
-
         public IActionResult Create()
         {
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PartnerLogo,ImageFile,Id")] Partner partner)
@@ -71,7 +67,6 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
             }
             return View(partner);
         }
-
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -81,7 +76,6 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
                 return NotFound();
             return View(partner);
         }
-
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -98,7 +92,6 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -108,7 +101,6 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
                 return NotFound();
             return View(partner);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PartnerLogo,ImageFile,Id")] Partner partner)

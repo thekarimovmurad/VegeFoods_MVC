@@ -14,7 +14,6 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
         {
             _db = db;
         }
-
         public async Task<IActionResult> Index()
         {
             DashboardViewModel dvm = new DashboardViewModel()
@@ -22,7 +21,6 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
                 partnersCount = await _db.Partners.CountAsync(),
                 slidersCount= await _db.Sliders.CountAsync(),
             };
-
             return View(dvm);
         }
     }

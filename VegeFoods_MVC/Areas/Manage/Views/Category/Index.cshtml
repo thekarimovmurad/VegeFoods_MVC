@@ -1,10 +1,10 @@
-﻿@model IEnumerable<VegeFoods_MVC.Models.Partner>
+﻿@model IEnumerable<VegeFoods_MVC.Models.Category>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index - Sliders</h1>
+<h1>Index - Category</h1>
 <br />
 @Html.Partial("_IndexCreateSection")
 <div class="row">
@@ -19,20 +19,28 @@
                                     @Html.DisplayNameFor(model => model.Id)
                                 </th>
                                 <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th scope="col">
                                     Image
                                 </th>
-                                <th scope="col"></th>
+                                <th scope="col">
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>
+                                    <td scope="row">
                                         @Html.DisplayFor(modelItem => item.Id)
                                     </td>
                                     <td scope="row">
-                                        <img class="rounded-circle img-3x me-2" src="~/images/@Html.DisplayFor(modelItem => item.PartnerLogo)" alt="Bootstrap Gallery" />
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td scope="row">
+                                        <img class="rounded-circle img-3x me-2" src="~/images/@Html.DisplayFor(modelItem => item.CategoryImage)"
+                                             alt="Bootstrap Gallery" />
                                     </td>
                                     <td>
                                         <a class="btn btn-warning btn-icon btn-sm mb-1" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil"></i></a>

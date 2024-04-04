@@ -4,8 +4,8 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
-
+<h1>Delete - Sliders</h1>
+<br />
 <div>
     <h3>Are you sure you want to delete this?</h3>
     <form asp-action="Delete">
@@ -40,9 +40,4 @@
         </dd>
     </dl>
 </div>
-
-<div>
-    <a class="btn btn-warning btn-icon btn-sm mb-1" asp-action="Edit" asp-route-id="@Model?.Id"><i class="bi bi-pencil"></i></a>
-    <a class="btn btn-danger btn-icon btn-sm mb-1" asp-action="Delete" asp-route-id="@Model?.Id"><i class="bi bi-trash"></i></a>
-    <a class="btn btn-primary btn-icon btn-sm mb-1" asp-action="Index">Back to List</a>
-</div>
+@Html.Partial("_DeleteButtonSection")

@@ -4,9 +4,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<hr />
+<h1>Create - Sliders</h1>
+<br />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create" enctype="multipart/form-data">
@@ -32,9 +31,6 @@
         </form>
     </div>
 </div>
-
-<div>
-    <a class="btn btn-primary btn-icon btn-sm mb-1" asp-action="Index">Back to List</a>
-</div>
+@Html.Partial("_CreateButtonSection")
 
 @section Scripts {@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}}

@@ -4,10 +4,9 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
+<h1>Details - Partner</h1>
+<br />
 <div>
-    <br />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Id)
@@ -23,8 +22,4 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a class="btn btn-warning btn-icon btn-sm mb-1" asp-action="Edit" asp-route-id="@Model?.Id"><i class="bi bi-pencil"></i></a>
-    <a class="btn btn-danger btn-icon btn-sm mb-1" asp-action="Delete" asp-route-id="@Model?.Id"><i class="bi bi-trash"></i></a>
-    <a class="btn btn-primary btn-icon btn-sm mb-1" asp-action="Index">Back to List</a>
-</div>
+@Html.Partial("_DeleteButtonSection")

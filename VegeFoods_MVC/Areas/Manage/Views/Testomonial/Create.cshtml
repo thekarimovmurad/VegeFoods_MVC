@@ -36,11 +36,7 @@
         </form>
     </div>
 </div>
-
-<div>
-    <a class="btn btn-primary btn-icon btn-sm mb-1" asp-action="Index">Back to List</a>
-</div>
-
+@Html.Partial("_CreateButtonSection")
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

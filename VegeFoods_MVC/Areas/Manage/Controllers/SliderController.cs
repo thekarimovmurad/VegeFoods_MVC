@@ -21,12 +21,10 @@ namespace VegeFoods_MVC.Areas.Admin.Controllers
             _db = db;
             _env = env;
         }
-
         public async Task<IActionResult> Index()
         {
             return View(await _db.Sliders.ToListAsync());
         }
-
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,12 +34,10 @@ namespace VegeFoods_MVC.Areas.Admin.Controllers
                 return NotFound();
             return View(slider);
         }
-
         public IActionResult Create()
         {
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BackgroundImage,ImageFile,Title,Subtitle,Id")] Slider slider)
@@ -71,7 +67,6 @@ namespace VegeFoods_MVC.Areas.Admin.Controllers
             }
             return View(slider);
         }
-
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -81,7 +76,6 @@ namespace VegeFoods_MVC.Areas.Admin.Controllers
                 return NotFound();
             return View(slider);
         }
-
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int? id)
@@ -98,7 +92,6 @@ namespace VegeFoods_MVC.Areas.Admin.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -108,7 +101,6 @@ namespace VegeFoods_MVC.Areas.Admin.Controllers
                 return NotFound();
             return View(slider);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BackgroundImage,ImageFile,Title,Subtitle,Id")] Slider slider)

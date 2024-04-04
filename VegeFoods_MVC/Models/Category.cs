@@ -6,10 +6,10 @@ namespace VegeFoods_MVC.Models
     {
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
-        public string CategoryImage { get; set; }
+        public string CategoryImage { get; set; } = string.Empty;
         [Display(Name = "Upload Image"), NotMapped]
         public IFormFile ImageFile { get; set; }
-        public List<Product> Product{ get; set; }
-        public List<Blog> Blog{ get; set; }
+        public List<Product> Product{ get; set; } = new List<Product>();
+        public List<Blog> Blog{ get; set; } = new List<Blog>();
     }
 }

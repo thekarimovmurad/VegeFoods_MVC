@@ -12,28 +12,28 @@ using VegeFoods_MVC.Utils.Extentions;
 namespace VegeFoods_MVC.Areas.Manage.Controllers
 {
     [Area("Manage")]
-    public class TestomonialController : Controller
+    public class CategoryController : Controller
     {
         private readonly AppDbContext _db;
         private readonly IWebHostEnvironment _env;
-        public TestomonialController(AppDbContext db, IWebHostEnvironment env)
+        public CategoryController(AppDbContext db, IWebHostEnvironment env)
         {
             _db = db;
             _env = env;
         }
         public async Task<IActionResult> Index()
         {
-            return View(await _db.Testomonials.ToListAsync());
+            return View(await _db.Categorys.ToListAsync());
         }
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
                 return NotFound();
-            var testomonial = await _db.Testomonials.FirstOrDefaultAsync(m => m.Id == id);
-            if (testomonial == null)
+            var category = await _db.Categorys.FirstOrDefaultAsync(m => m.Id == id);
+            if (category == null)
                 return NotFound();
 
-            return View(testomonial);
+            return View(category);
         }
         public IActionResult Create()
         {
@@ -41,15 +41,18 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProfileImage,ImageFile,FullName,Title,Message,Id")] Testomonial testomonial)
+        public async Task<IActionResult> Create([Bind("Name,ImageFile,CategoryImage,Id")] Category category)
         {
             if (ModelState.IsValid)
             {
-                if (testomonial.ImageFile.CheckFileType("image/"))
+                if (category.ImageFile.CheckFileType("image/"))
                 {
-                    if (testomonial.ImageFile.CheckFileSize(5000))
+                    if (category.ImageFile.CheckFileSize(5000))
                     {
-                        testomonial.ProfileImage = await testomonial.ImageFile.FileUpload(_env.WebRootPath, @"images");
+                        category.CategoryImage = await category.ImageFile.FileUpload(_env.WebRootPath, @"images");
+                        _db.Add(category);
+                        await _db.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
                     }
                     else
                     {
@@ -62,43 +65,41 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
                     ModelState.AddModelError("ImageFile", "File must be an image.");
                     return View();
                 }
-                        _db.Add(testomonial);
-                        await _db.SaveChangesAsync();
-                        return RedirectToAction(nameof(Index));
             }
-            return View(testomonial);
+            return View(category);
         }
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
                 return NotFound();
-            var testomonial = await _db.Testomonials.FirstOrDefaultAsync(m => m.Id == id);
-            if (testomonial == null)
+            var category = await _db.Categorys.FirstOrDefaultAsync(m => m.Id == id);
+            if (category == null)
                 return NotFound();
 
-            return View(testomonial);
+            return View(category);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProfileImage,ImageFile,FullName,Title,Message,Id")] Testomonial testomonial)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,ImageFile,CategoryImage,Id")] Category category)
         {
-            if (testomonial.ImageFile == null)
+            if (category.ImageFile == null)
             {
                 ModelState.Remove("ImageFile");
-                ModelState.Remove("ProfileImage");
+                ModelState.Remove("CategoryImage");
             }
+
             if (ModelState.IsValid)
             {
-                if (testomonial.ImageFile != null)
+                if (category.ImageFile != null)
                 {
-                    if (testomonial.ImageFile.CheckFileType("image/"))
+                    if (category.ImageFile.CheckFileType("image/"))
                     {
-                        if (testomonial.ImageFile.CheckFileSize(5000))
+                        if (category.ImageFile.CheckFileSize(5000))
                         {
-                            string filePath = Path.Combine(_env.WebRootPath, @"images\", testomonial.ProfileImage);
+                            string filePath = Path.Combine(_env.WebRootPath, @"images\", category.CategoryImage);
                             if (System.IO.File.Exists(filePath))
                                 System.IO.File.Delete(filePath);
-                            testomonial.ProfileImage = await testomonial.ImageFile.FileUpload(_env.WebRootPath, @"images");
+                            category.CategoryImage = await category.ImageFile.FileUpload(_env.WebRootPath, @"images");
                         }
                         else
                         {
@@ -112,21 +113,21 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
                         return View();
                     }
                 }
-                _db.Update(testomonial);
+                _db.Update(category);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(testomonial);
+            return View(category);
         }
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
                 return NotFound();
-            var testomonial = await _db.Testomonials.FirstOrDefaultAsync(m => m.Id == id);
-            if (testomonial == null)
+            var category = await _db.Categorys.FirstOrDefaultAsync(m => m.Id == id);
+            if (category == null)
                 return NotFound();
 
-            return View(testomonial);
+            return View(category);
         }
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -134,13 +135,14 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
         {
             if (id == null)
                 return NotFound();
-            var testomonial = await _db.Testomonials.FirstOrDefaultAsync(m => m.Id == id);
-            if (testomonial == null)
+            var category = await _db.Categorys.FirstOrDefaultAsync(m => m.Id == id);
+            if (category == null)
                 return NotFound();
-            string filePath = Path.Combine(_env.WebRootPath, @"images\", testomonial.ProfileImage);
+
+            string filePath = Path.Combine(_env.WebRootPath, @"images\", category.CategoryImage);
             if (System.IO.File.Exists(filePath))
                 System.IO.File.Delete(filePath);
-            _db.Testomonials.Remove(testomonial);
+            _db.Categorys.Remove(category);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

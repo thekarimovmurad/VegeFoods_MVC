@@ -4,12 +4,9 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Sliders</h1>
+<h1>Index - Sliders</h1>
 <br />
-<p>
-    <a class="btn btn-primary btn-lg" asp-action="Create">Create New</a>
-</p>
-
+@Html.Partial("_IndexCreateSection")
 <div class="row">
 	<div class="col-xxl-12">
 		<div class="card mb-4">
@@ -37,7 +34,7 @@
 							@foreach (var item in Model)
 							{
 								<tr>
-									<td>
+									<td scope="row">
 										@Html.DisplayFor(modelItem => item.Id)
 									</td>
 								<td scope="row">

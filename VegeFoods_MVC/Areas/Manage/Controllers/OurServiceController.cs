@@ -14,17 +14,14 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
     public class OurServiceController : Controller
     {
 		private readonly AppDbContext _db;
-
 		public OurServiceController(AppDbContext db)
 		{
 			_db = db;
 		}
-
 		public async Task<IActionResult> Index()
 		{
 			return View(await _db.OurServices.ToListAsync());
 		}
-
 		public async Task<IActionResult> Details(int? id)
 		{
 			if (id == null)
@@ -34,12 +31,10 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
 				return NotFound();
 			return View(ourService);
 		}
-
 		public IActionResult Create()
 		{
 			return View();
 		}
-
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create([Bind("SVGImage,Title,Subtitle,Id")] OurService ourService)
@@ -52,7 +47,6 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
 			}
 			return View(ourService);
 		}
-
 		public async Task<IActionResult> Edit(int? id)
 		{
 			if (id == null)
@@ -62,7 +56,6 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
 				return NotFound();
 			return View(ourService);
 		}
-
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Edit(int id, [Bind("SVGImage,Title,Subtitle,Id")] OurService ourService)
@@ -75,7 +68,6 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
 			}
 			return View(ourService);
 		}
-
 		public async Task<IActionResult> Delete(int? id)
 		{
 			if (id == null)
@@ -85,7 +77,6 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
 				return NotFound();
 			return View(ourService);
 		}
-
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> DeleteConfirmed(int id)
@@ -99,6 +90,5 @@ namespace VegeFoods_MVC.Areas.Manage.Controllers
 			await _db.SaveChangesAsync();
 			return RedirectToAction(nameof(Index));
 		}
-
 	}
 }
