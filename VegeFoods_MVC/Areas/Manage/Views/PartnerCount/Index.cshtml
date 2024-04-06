@@ -1,0 +1,45 @@
+﻿@model VegeFoods_MVC.Models.PartnerCount
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h4>PartnerCount</h4>
+<br />
+<div>
+    <a class="btn btn-warning btn-icon btn-sm  my-3" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+</div>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BackgroundImage)
+        </dt>
+        <dd class="col-sm-10">
+            <img class="col-sm-10" src="~/images/@Html.DisplayFor(model => model.BackgroundImage)" />
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HappyUser)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HappyUser)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Awards)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Awards)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Branch)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Branch)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Partner)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Partner)
+        </dd>
+    </dl>
+</div>
