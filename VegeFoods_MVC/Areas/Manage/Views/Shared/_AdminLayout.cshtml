@@ -24,6 +24,12 @@
 				<div class="sidebarMenuScroll">
 					<ul class="sidebar-menu">
 						<li>
+							<a asp-controller="ContactUs" asp-action="index">
+								<i class="bi bi-envelope"></i>
+								<span class="menu-text">Contact Us</span>
+							</a>
+						</li>
+						<li>
 							<a asp-controller="AboutUs" asp-action="index">
 								<i class="bi bi-database"></i>
 								<span class="menu-text">About Us</span>
@@ -102,6 +108,8 @@
 							</a>
 						</li>
 					</ul>
+
+
 				</div>
 			</nav>
 			<div class="app-container">
@@ -227,7 +235,7 @@
 						</li>
 						<li class="breadcrumb-item" aria-current="page">Dashboard</li>
 					</ol>
-@* 					<div class="ms-auto d-flex flex-row">
+ 					<div class="ms-auto d-flex flex-row">
 						<div class="d-flex flex-column me-5 text-end">
 							<p class="m-0 text-secondary">Sales</p>
 							<h3 class="m-0">5,58,560</h3>
@@ -236,7 +244,7 @@
 							<p class="m-0 text-secondary">Income</p>
 							<h3 class="m-0">$65,80,990</h3>
 						</div>
-					</div> *@
+					</div>
 				</div>
 				<div class="app-body">
 				@RenderBody()

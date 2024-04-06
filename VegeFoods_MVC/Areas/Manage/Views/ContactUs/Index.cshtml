@@ -1,0 +1,122 @@
+﻿@model IEnumerable<VegeFoods_MVC.Models.ContactUs>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<br />
+<h3>Unread messages</h3>
+<br />
+<div class="row">
+    <div class="col-xxl-12">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table align-middle table-hover m-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.FullName)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Subject)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Time)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                if (!item.Read)
+                                {
+                                    
+                                    <tr>
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.FullName)
+                                        </td>
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.Subject)
+                                        </td>
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.Time)
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-success btn-icon btn-sm mb-1" asp-action="Index">Go to read</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h3>Read messages</h3>
+<br />
+<div class="row">
+    <div class="col-xxl-12">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table align-middle table-hover m-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.FullName)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Subject)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Time)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                if (item.Read)
+                                {
+
+                                    <tr>
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.FullName)
+                                        </td>
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.Subject)
+                                        </td>
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.Time)
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-success btn-icon btn-sm mb-1" asp-action="Index">Go to read</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

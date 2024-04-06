@@ -20,5 +20,6 @@ namespace VegeFoods_MVC.DAL
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<BlogTag> BlogTags { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<ContactUs> ContacUs { get; set; }
     }
 }

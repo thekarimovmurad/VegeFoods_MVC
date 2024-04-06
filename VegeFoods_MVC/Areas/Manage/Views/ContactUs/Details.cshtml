@@ -1,0 +1,53 @@
+﻿@model VegeFoods_MVC.Models.ContactUs
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ContactUs</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Read)
+        </dt>
+        <dd class = "col-sm-10">
+            read
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary btn-icon btn-sm mb-1" asp-action="Index">Back to List</a>
+</div>
